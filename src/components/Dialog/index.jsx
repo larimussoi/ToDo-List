@@ -1,10 +1,19 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import "./dialog.estilos.css";
 
-export function Dialog() {
+export function Dialog({ isOpen, onClose }) {
   //var dialog = document.getElementById("updateDetails");
 
   const dialogRef = useRef(null);
+
+  useEffect(() => {
+    console.log("deveriamos mostrar a modal?", isOpen);
+    if (isOpen) {
+      openDialog();
+    } else {
+      closeDialog();
+    }
+  }, [isOpen]);
 
   const openDialog = () => {
     dialogRef.current.showModal();
@@ -17,12 +26,11 @@ export function Dialog() {
   return (
     <>
       <dialog ref={dialogRef}>
-        <button autoFocus onClick={closeDialog}>
+        <button autoFocus onClick={onClose}>
           Close
         </button>
         <p>This modal </p>
       </dialog>
-      <button onClick={openDialog}>Show the dialog</button>
     </>
   );
 }
