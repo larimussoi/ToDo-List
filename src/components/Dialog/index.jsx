@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import "./dialog.estilos.css";
 
-export function Dialog({ isOpen, onClose }) {
+export function Dialog({ isOpen, onClose, children, submitBtn }) {
   //var dialog = document.getElementById("updateDetails");
 
   const dialogRef = useRef(null);
@@ -25,11 +25,18 @@ export function Dialog({ isOpen, onClose }) {
 
   return (
     <>
-      <dialog ref={dialogRef}>
-        <button autoFocus onClick={onClose}>
-          Close
-        </button>
-        <p>This modal </p>
+      <dialog ref={dialogRef} className="dialog">
+        <div className="close-btn">
+          <button autoFocus onClick={onClose} className="btn-close">
+            X
+          </button>
+        </div>
+        <div className="body">{children}</div>
+        <div className="submit-btn">
+          <button autoFocus onClick={submitBtn} className="btn-submit">
+            Salvar item
+          </button>
+        </div>
       </dialog>
     </>
   );
