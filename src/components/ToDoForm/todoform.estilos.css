@@ -1,0 +1,26 @@
+.btn-submit {
+  background-color: #877eed;
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 24px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 150%;
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  background-color: #544acb;
+  padding: 12px 16px;
+}
+
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.todo-form .btn-submit {
+  align-self: center;
+}
