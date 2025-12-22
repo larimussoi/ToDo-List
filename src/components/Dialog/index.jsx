@@ -1,13 +1,12 @@
 import { useEffect, useRef } from "react";
 import "./dialog.estilos.css";
 
-export function Dialog({ isOpen, onClose, children, submitBtn }) {
+export function Dialog({ isOpen, onClose, children }) {
   //var dialog = document.getElementById("updateDetails");
 
   const dialogRef = useRef(null);
 
   useEffect(() => {
-    console.log("deveriamos mostrar a modal?", isOpen);
     if (isOpen) {
       openDialog();
     } else {
@@ -26,17 +25,10 @@ export function Dialog({ isOpen, onClose, children, submitBtn }) {
   return (
     <>
       <dialog ref={dialogRef} className="dialog">
-        <div className="close-btn">
-          <button autoFocus onClick={onClose} className="btn-close">
-            X
-          </button>
-        </div>
+        <button onClick={onClose} className="btn-close">
+          X
+        </button>
         <div className="body">{children}</div>
-        <div className="submit-btn">
-          <button autoFocus onClick={submitBtn} className="btn-submit">
-            Salvar item
-          </button>
-        </div>
       </dialog>
     </>
   );
