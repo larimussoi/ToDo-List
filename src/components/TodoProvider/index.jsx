@@ -1,34 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoContext from "./TodoContext";
 
 export function TodoProvider({ children }) {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      description: "JSX e componentes",
-      completed: false,
-      createdAt: "2022-10-31",
-    },
-    {
-      id: 2,
-      description: "Controle de inputs e formulários controlados",
-      completed: true,
-      createdAt: "2022-10-31",
-    },
-  ]);
+  const savedTodo = localStorage.getItem("todos");
+
+  const [todos, setTodos] = useState(savedTodo ? JSON.parse(savedTodo) : []);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const addToDo = (formData) => {
     const description = formData.get("description");
 
-    setTodos((prev) => [
-      ...prev,
-      {
-        id: crypto.randomUUID(),
+    setTodos((prev) => {
+      const todo = {
+        id: prev.length + 1,
         description,
         completed: false,
         createdAt: new Date().toISOString(),
-      },
-    ]);
+      };
+      return [...prev, todo];
+    });
   };
 
   const toggleTodoCompleted = (todo) => {

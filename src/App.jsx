@@ -29,7 +29,7 @@ function App() {
       <Container>
         <Header>
           <Heading>
-            <IconSchool /> Plano de estudos
+            <IconSchool /> Lista de Tarefas
           </Heading>
         </Header>
         <Dialog />
