@@ -89,6 +89,26 @@ function App() {
     toggleDialog();
   };
 
+  const toggleTodoCompleted = (todo) => {
+    setTodos((prevState) => {
+      return prevState.map((t) => {
+        if (t.id == todo.id) {
+          return {
+            ...t,
+            completed: !t.completed,
+          };
+        }
+        return t;
+      });
+    });
+  };
+
+  const deleteTodo = (todo) => {
+    setTodos((prevState) => {
+      return prevState.filter((t) => t.id != todo.id);
+    });
+  };
+
   return (
     <main>
       <Container>
@@ -99,12 +119,28 @@ function App() {
         </Header>
         <Dialog />
         <ChecklistsWrapper>
+          {/* <TodoGroup
+            heading="Para fazer"
+            itens={todos.filter((t) => !t.completed)}
+          />
+          <TodoGroup
+            heading="Concluído"
+            itens={todos.filter((t) => !t.completed)}
+          /> */}
+
           <SubHeading>Para estudar</SubHeading>
           <ToDoList>
             {todos
               .filter((t) => !t.completed)
               .map(function (t) {
-                return <ToDoItem key={t.id} item={t} />;
+                return (
+                  <ToDoItem
+                    key={t.id}
+                    item={t}
+                    onToggleCompleted={toggleTodoCompleted}
+                    onDeleteTodo={deleteTodo}
+                  />
+                );
               })}
           </ToDoList>
           <SubHeading>Concluído</SubHeading>
@@ -112,7 +148,14 @@ function App() {
             {todos
               .filter((t) => t.completed)
               .map(function (t) {
-                return <ToDoItem key={t.id} item={t} />;
+                return (
+                  <ToDoItem
+                    key={t.id}
+                    item={t}
+                    onToggleCompleted={toggleTodoCompleted}
+                    onDeleteTodo={deleteTodo}
+                  />
+                );
               })}
           </ToDoList>
           <Footer>
